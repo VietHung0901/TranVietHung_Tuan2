@@ -3,6 +3,7 @@ package com.example.ngay28.Controller;
 
 import com.example.ngay28.Entities.Book;
 import com.example.ngay28.Services.BookService;
+import com.example.ngay28.Services.CategoryService;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -20,6 +21,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class BookController {
     private final BookService bookService;
+    private final CategoryService categoryService;
+
     @GetMapping
     public String showAllBooks(@NotNull Model model) {
         model.addAttribute("books", bookService.getAllBooks());
@@ -27,6 +30,8 @@ public class BookController {
     }
     @GetMapping("/add")
     public String addBookForm(@NotNull Model model) {
+        var categories  = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
         model.addAttribute("book", new Book());
         return "book/add";
     }
@@ -39,6 +44,8 @@ public class BookController {
     @GetMapping("/edit/{id}")
     public String editBookForm(@NotNull Model model, @PathVariable long id)
     {
+        var categories  = categoryService.getAllCategories();
+        model.addAttribute("categories", categories);
         var book = bookService.getBookById(id).orElse(null);
         model.addAttribute("book", book != null ? book : new Book());
         return "book/edit";

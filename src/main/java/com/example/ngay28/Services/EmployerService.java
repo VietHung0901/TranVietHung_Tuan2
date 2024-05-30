@@ -31,9 +31,13 @@ public class EmployerService {
         if (employerOptional.isPresent()) {
             Employer employerUpdate = employerOptional.get();
             employerUpdate.setEmployer_name(employer.getEmployer_name());
+            employerUpdate.setEmail(employer.getEmail());
+            employerUpdate.setSdt(employer.getSdt());
+            employerUpdate.setDiaChi(employer.getDiaChi());
+            employerUpdate.setNgaySinh(employer.getNgaySinh());
         }
     }
-    public void deleteCategoryById(Long id) {
+    public void deleteEmployerById(Long id) {
         getEmployerById(id).ifPresent(employers::remove);
     }
 }

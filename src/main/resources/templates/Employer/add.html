@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initialscale=1.0">
+    <th:block th:replace="~{layout::link-css}"></th:block>
+    <th:block th:replace="~{layout::custom-css}"></th:block>
+    <title>Add Employer</title>
+</head>
+<body>
+<th:block th:replace="~{layout::header}"></th:block>
+<div class="container">
+    <h1>Add Employer</h1>
+    <form th:action="@{/employers/add}" th:object="${employer}" method="post">
+        <div class="col-6 mb-3">
+            <label class="form-label" for="id">Id:</label>
+            <input class="form-control" type="text" th:field="*{id}" id="id">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="employer_name">Employer Name:</label>
+            <input class="form-control" type="text" th:field="*{employer_name}" id="employer_name">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="email">Email:</label>
+            <input class="form-control" type="text" th:field="*{email}" id="email">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="sdt">Phone:</label>
+            <input class="form-control" type="text" th:field="*{sdt}" id="sdt">
+        </div>
+        <div class="col-6 mb-3"><label class="form-label" for="diaChi">Address:</label>
+            <input class="form-control" type="text" th:field="*{diaChi}" id="diaChi">
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="ngaySinh">Date of Birth:</label>
+            <input class="form-control" type="date" th:field="*{ngaySinh}" id="ngaySinh">
+        </div>
+        <input type="submit" class="btn btn-primary" value="Save">
+    </form>
+    <br>
+    <a th:href="@{/employers}">Back to List</a>
+</div>
+<th:block th:replace="~{layout::footer}"></th:block>
+</body>
+</html>
