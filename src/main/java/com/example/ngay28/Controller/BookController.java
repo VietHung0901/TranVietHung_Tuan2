@@ -14,8 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@Getter
-@Setter
+
 @Controller
 @RequestMapping("/books")
 @RequiredArgsConstructor

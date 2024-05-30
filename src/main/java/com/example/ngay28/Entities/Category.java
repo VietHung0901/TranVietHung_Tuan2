@@ -2,15 +2,15 @@ package com.example.ngay28.Entities;
 
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Book {
+public class Category {
     private Long id;
-    private String title;
-    private String author;
-    private Double price;
-    private String category;
+    private String category_name;
 }

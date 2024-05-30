@@ -18,6 +18,7 @@ public class BookService {
                 .filter(book -> book.getId().equals(id))
                 .findFirst();
     }
+
     public void addBook(Book book) {
         books.add(book);
     }
