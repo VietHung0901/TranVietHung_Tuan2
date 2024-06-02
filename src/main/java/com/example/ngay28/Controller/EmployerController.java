@@ -32,7 +32,32 @@ public class EmployerController {
         return "Employer/add";
     }
     @PostMapping("/add")
-    public String addEmployer(@ModelAttribute("employer") Employer employer) {
+    public String addEmployer(@ModelAttribute("employer") Employer employer, Model model) {
+        if(!employerService.isValidEmployerName(employer.getEmployer_name()))
+        {
+            model.addAttribute("errorMessage", "Tên không hợp lệ!");
+            return "Employer/add";
+        }
+        if(!employerService.isValidEmail(employer.getEmail()))
+        {
+            model.addAttribute("errorMessage", "Email không hợp lệ!");
+            return "Employer/add";
+        }
+        if(!employerService.isValidPhoneNumber(employer.getSdt()))
+        {
+            model.addAttribute("errorMessage", "Số điện thoại không hợp lệ!");
+            return "Employer/add";
+        }
+        if(!employerService.isValidAddress(employer.getDiaChi()))
+        {
+            model.addAttribute("errorMessage", "Địa chỉ không hợp lệ!");
+            return "Employer/add";
+        }
+        if(!employerService.isValidBirthDate(employer.getNgaySinh()))
+        {
+            model.addAttribute("errorMessage", "Ngày sinh không hợp lệ!");
+            return "Employer/add";
+        }
         if(employerService.getEmployerById(employer.getId()).isEmpty())
             employerService.addEmployer(employer);
         return "redirect:/employers";

@@ -13,10 +13,10 @@
 <div class="container">
     <h1>Add Employer</h1>
     <form th:action="@{/employers/add}" th:object="${employer}" method="post">
-        <div class="col-6 mb-3">
-            <label class="form-label" for="id">Id:</label>
-            <input class="form-control" type="text" th:field="*{id}" id="id">
-        </div>
+<!--        <div class="col-6 mb-3">-->
+<!--            <label class="form-label" for="id">Id:</label>-->
+<!--            <input class="form-control" type="text" th:field="*{id}" id="id">-->
+<!--        </div>-->
         <div class="col-6 mb-3">
             <label class="form-label" for="employer_name">Employer Name:</label>
             <input class="form-control" type="text" th:field="*{employer_name}" id="employer_name">
@@ -38,6 +38,7 @@
         </div>
         <input type="submit" class="btn btn-primary" value="Save">
     </form>
+    <div th:if="${errorMessage}" th:text="${errorMessage}" class="alert alert-danger"></div>
     <br>
     <a th:href="@{/employers}">Back to List</a>
 </div>
