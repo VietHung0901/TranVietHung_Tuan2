@@ -4,16 +4,15 @@ package com.example.ngay28.Controller;
 import com.example.ngay28.Entities.Book;
 import com.example.ngay28.Services.BookService;
 import com.example.ngay28.Services.CategoryService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.antlr.v4.runtime.misc.NotNull;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 
 @Controller
@@ -60,5 +59,42 @@ public class BookController {
         if (bookService.getBookById(id).isPresent())
             bookService.deleteBookById(id);
         return "redirect:/books";
+    }
+
+    //Tìm kiếm trả về view
+    @GetMapping("/search")
+    public String searchBooksTitle(@RequestParam("title") String title, @RequestParam("author") String author, Model model) {
+        List<Book> searchResults = bookService.searchBooks(title,author);
+        model.addAttribute("books", searchResults);
+        model.addAttribute("title", title);
+        model.addAttribute("author", author);
+        return "book/list";
+    }
+
+    @GetMapping("/search-suggestions-title")
+    public ResponseEntity<Map<String, List<String>>> getBookSearchSuggestionsTitle(@RequestParam("keyword") String keyword) {
+        List<Book> searchResults = bookService.searchBooksTilte(keyword);
+        List<String> bookTitles = searchResults.stream()
+                .map(Book::getTitle)
+                .collect(Collectors.toList());
+
+        Map<String, List<String>> suggestions = new HashMap<>();
+        suggestions.put("bookTitles", bookTitles);
+
+        return ResponseEntity.ok(suggestions);
+    }
+
+    @GetMapping("/search-suggestions-author")
+    public ResponseEntity<Map<String, List<String>>> getBookSearchSuggestionsAuthor(@RequestParam("keyword") String keyword) {
+        List<Book> searchResults = bookService.searchBooksAuthor(keyword);
+
+        List<String> authors = searchResults.stream()
+                .map(Book::getAuthor)
+                .collect(Collectors.toList());
+
+        Map<String, List<String>> suggestions = new HashMap<>();
+        suggestions.put("authors", authors);
+
+        return ResponseEntity.ok(suggestions);
     }
 }
