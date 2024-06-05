@@ -89,7 +89,7 @@
             var keyword = $(this).val();
             if (keyword.trim() !== '') {
                 $.ajax({
-                    url: 'books/search-suggestions-title',
+                    url: '/books/search-suggestions-title',
                     data: { keyword: keyword },
                     success: function(data) {
                         suggestionList.empty();
@@ -118,7 +118,7 @@
             var keyword = $(this).val();
             if (keyword.trim() !== '') {
                 $.ajax({
-                    url: 'books/search-suggestions-author',
+                    url: '/books/search-suggestions-author',
                     data: { keyword: keyword },
                     success: function(data) {
                         suggestionList.empty();
